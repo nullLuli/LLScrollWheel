@@ -122,7 +122,12 @@ static int buttonCounter = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    UIImageView * imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Background"]];
+    [self.view addSubview:imageView];
+    __weak typeof(self) weakSelf = self;
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
     
     [self buttonArray];
 }
@@ -136,7 +141,7 @@ static int buttonCounter = 8;
     
     self.lastOffSet = scrollView.contentOffset.x;
     
-    speed = speed/70;
+    speed = speed/65;
     //动画
     [UIView animateWithDuration:0.1 animations:^{
         for (UIButton * button in self.buttonArray) {
